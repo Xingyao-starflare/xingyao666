@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阿里云代理商 | 星耀云</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root{--primary:#0F3460;--dark:#000000;--mid-blue:#1A1A2E;--light-blue:#16213E;--text:#E5E5E5;--accent:#00D4FF;--orange:#FF6B35;--ali-orange:#FF6A00}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Microsoft YaHei,Arial,sans-serif;background:linear-gradient(135deg,var(--dark) 0%,var(--mid-blue) 50%,var(--light-blue) 100%);color:var(--text);line-height:1.6;overflow-x:hidden}
+        
+        /* Header Styles */
+        header{background:var(--dark);padding:0;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 20px rgba(15,52,96,0.5)}
+        .header-top{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto;padding:15px 5%}
+        .logo-container{display:flex;align-items:center;gap:20px}
+        .logo-img{height:60px;width:auto;filter:drop-shadow(0 0 10px rgba(0,212,255,0.3))}
+        .logo{font-size:28px;font-weight:900;letter-spacing:2px;text-shadow:0 0 20px rgba(0,212,255,0.8)}
+        .logo span{color:var(--accent)}
+        
+        /* Navigation Menu */
+        .nav-menu{background:rgba(26,26,46,0.95);border-top:1px solid rgba(0,212,255,0.2)}
+        .nav-container{max-width:1400px;margin:0 auto;padding:0 5%;display:flex;justify-content:center}
+        .nav-menu ul{display:flex;list-style:none;gap:0}
+        .nav-menu li{position:relative}
+        .nav-menu a{display:block;padding:15px 25px;color:var(--text);text-decoration:none;font-size:15px;transition:0.3s;border-bottom:3px solid transparent}
+        .nav-menu a:hover{color:var(--accent);background:rgba(0,212,255,0.1);border-bottom-color:var(--accent)}
+        
+        main{max-width:1400px;margin:150px auto 0;padding:0 5%}
+        section{padding:60px 0;text-align:center}
+        
+        /* Hero Section */
+        .hero-banner{background:linear-gradient(135deg, rgba(255,106,0,0.9) 0%, rgba(255,140,0,0.9) 100%);border-radius:20px;padding:60px 40px;margin-bottom:60px;position:relative;overflow:hidden}
+        .hero-banner::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><circle cx="100" cy="100" r="50" fill="rgba(255,255,255,0.1)"/><circle cx="1100" cy="500" r="80" fill="rgba(255,255,255,0.1)"/></svg>');opacity:0.3;z-index:0}
+        .hero-banner>*{position:relative;z-index:1}
+        .hero-banner h1{font-size:42px;color:#fff;margin-bottom:20px}
+        .hero-banner p{font-size:18px;color:rgba(255,255,255,0.95);max-width:800px;margin:0 auto}
+        
+        /* Content Card */
+        .content-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border-radius:16px;padding:40px;margin:40px 0;border:1px solid rgba(0,212,255,0.1)}
+        .content-card h2{font-size:32px;color:var(--accent);margin-bottom:30px}
+        .content-card h3{font-size:24px;color:var(--text);margin:30px 0 20px;text-align:left}
+        .content-card p{font-size:16px;line-height:1.8;text-align:left;margin-bottom:20px;opacity:0.9}
+        .content-card ul{text-align:left;margin:20px 0;padding-left:20px}
+        .content-card li{font-size:16px;line-height:1.8;margin:10px 0;opacity:0.9}
+        
+        /* Feature Grid */
+        .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;margin:40px 0}
+        .feature-item{background:rgba(255,255,255,0.05);padding:30px;border-radius:12px;border:1px solid rgba(255,106,0,0.2);transition:0.3s}
+        .feature-item:hover{transform:translateY(-5px);border-color:var(--ali-orange)}
+        .feature-item i{font-size:40px;color:var(--ali-orange);margin-bottom:15px}
+        .feature-item h4{font-size:20px;margin-bottom:15px;color:var(--text)}
+        .feature-item p{font-size:14px;opacity:0.85;line-height:1.6}
+        
+        /* Product Grid */
+        .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin:30px 0}
+        .product-item{background:linear-gradient(135deg, rgba(255,106,0,0.1) 0%, rgba(15,52,96,0.3) 100%);padding:25px;border-radius:12px;border:1px solid rgba(255,106,0,0.2);transition:0.3s;text-align:center}
+        .product-item:hover{transform:translateY(-5px);border-color:var(--ali-orange)}
+        .product-item h5{font-size:18px;color:var(--ali-orange);margin-bottom:10px}
+        .product-item p{font-size:14px;opacity:0.85}
+        
+        /* Table */
+        .info-table{width:100%;margin:30px 0;border-collapse:collapse}
+        .info-table th,.info-table td{padding:15px;text-align:left;border:1px solid rgba(0,212,255,0.2)}
+        .info-table th{background:rgba(255,106,0,0.1);color:var(--ali-orange);font-weight:600}
+        .info-table td{background:rgba(255,255,255,0.03)}
+        
+        /* FAQ */
+        .faq-item{background:rgba(255,255,255,0.05);border-radius:12px;padding:25px;margin:20px 0;border:1px solid rgba(0,212,255,0.1);text-align:left}
+        .faq-item h4{color:var(--accent);margin-bottom:15px;font-size:18px}
+        .faq-item p{opacity:0.9;line-height:1.7}
+        
+        /* CTA Buttons */
+        .cta-buttons{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:40px 0}
+        .cta-btn{display:inline-flex;align-items:center;gap:10px;padding:15px 35px;border-radius:50px;font-size:16px;font-weight:600;text-decoration:none;transition:0.3s}
+        .cta-btn.telegram{background:#0088cc;color:#fff}
+        .cta-btn.whatsapp{background:#25D366;color:#fff}
+        .cta-btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+        
+        /* Footer */
+        footer{background:var(--dark);color:#888;padding:40px 0;text-align:center;font-size:14px;margin-top:60px}
+        footer a{color:var(--accent);text-decoration:none}
+        footer a:hover{text-decoration:underline}
+        
+        @media(max-width:768px){
+            .hero-banner h1{font-size:28px}
+            .hero-banner p{font-size:16px}
+            .content-card{padding:25px}
+            .feature-grid,.product-grid{grid-template-columns:1fr}
+            main{margin-top:180px}
+        }
+    </style>
+</head>
+<body class="lang-zh">
+
+<header>
+    <div class="header-top">
+        <div class="logo-container">
+            <img src="starflare_logo_transparent.png" alt="Starflare Cloud Logo" class="logo-img">
+            <div class="logo"><span>星耀云</span> Starflare Cloud</div>
+        </div>
+        <div class="lang-switch">
+            <button onclick="setLang('zh')" class="active">中文</button>
+            <button onclick="setLang('en')">EN</button>
+            <button onclick="setLang('pt')">PT</button>
+        </div>
+    </div>
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <ul>
+                <li><a href="index.html">首页</a></li>
+                <li><a href="aws.html">亚马逊云AWS</a></li>
+                <li><a href="aliyun.html" style="border-bottom-color:var(--accent);color:var(--accent)">阿里云</a></li>
+                <li><a href="tencent.html">腾讯云</a></li>
+                <li><a href="cloudflare.html">Cloudflare</a></li>
+                <li><a href="cdn.html">CDN加速</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+        <h1>阿里云代理商 - 星耀云</h1>
+        <p>阿里云国际版账号代充值，免实名，免信用卡，支持多币种支付<br>享受更优惠的价格+专业技术支持+7×24小时服务</p>
+    </div>
+
+    <!-- 为什么选择星耀云 -->
+    <section class="content-card">
+        <h2>为什么选择星耀云购买阿里云？</h2>
+        <p>作为阿里云官方合作伙伴，星耀云为您提供更优质的服务和更优惠的价格。</p>
+        
+        <div class="feature-grid">
+            <div class="feature-item">
+                <i class="fas fa-dollar-sign"></i>
+                <h4>价格优势</h4>
+                <p>享受阿里云官网价格的折扣优惠，最高可达40%，帮助企业降低云服务成本</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-headset"></i>
+                <h4>专业服务</h4>
+                <p>7×24小时技术支持，资深工程师团队提供架构咨询、迁移服务、故障排查等全方位服务</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-credit-card"></i>
+                <h4>支付便捷</h4>
+                <p>支持支付宝、微信、银行转账、USDT等多种支付方式，无需绑定信用卡，充值快速到账</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-shield-alt"></i>
+                <h4>免实名认证</h4>
+                <p>提供国际版账号，无需实名认证，保护您的隐私安全，快速开通使用</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 阿里云产品优势 -->
+    <section class="content-card">
+        <h2>阿里云产品优势</h2>
+        <p>阿里云是全球领先的云计算及人工智能科技公司，为200多个国家和地区的企业、开发者和政府机构提供服务。</p>
+        
+        <div class="feature-grid">
+            <div class="feature-item">
+                <i class="fas fa-globe"></i>
+                <h4>全球覆盖</h4>
+                <p>在全球27个地域部署了84个可用区，覆盖亚太、欧洲、美洲、中东等地区，满足全球业务需求</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-server"></i>
+                <h4>产品丰富</h4>
+                <p>提供200+款云产品，涵盖计算、存储、网络、数据库、安全、大数据、人工智能等领域</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-lock"></i>
+                <h4>安全可靠</h4>
+                <p>通过多项国际安全认证，提供DDoS防护、WAF、数据加密等全方位安全防护服务</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-chart-line"></i>
+                <h4>弹性扩展</h4>
+                <p>支持秒级弹性伸缩，根据业务需求自动调整资源，确保业务高可用和成本最优</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心产品 -->
+    <section class="content-card">
+        <h2>阿里云核心产品</h2>
+        <p>星耀云提供阿里云全线产品代理服务，以下是热门产品推荐</p>
+        
+        <div class="product-grid">
+            <div class="product-item">
+                <h5>云服务器 ECS</h5>
+                <p>弹性计算服务，提供安全可靠、弹性扩展的云服务器，支持多种实例规格</p>
+            </div>
+            <div class="product-item">
+                <h5>对象存储 OSS</h5>
+                <p>海量、安全、低成本、高可靠的云存储服务，支持任意类型数据的存储</p>
+            </div>
+            <div class="product-item">
+                <h5>云数据库 RDS</h5>
+                <p>稳定可靠、可弹性伸缩的在线数据库服务，支持MySQL、SQL Server、PostgreSQL等</p>
+            </div>
+            <div class="product-item">
+                <h5>负载均衡 SLB</h5>
+                <p>对多台云服务器进行流量分发的负载均衡服务，提高应用系统的可用性</p>
+            </div>
+            <div class="product-item">
+                <h5>CDN 内容分发</h5>
+                <p>将源站内容分发至全国所有节点，缩短用户访问时间，提升用户体验</p>
+            </div>
+            <div class="product-item">
+                <h5>云安全中心</h5>
+                <p>统一的云平台安全管理系统，提供安全预防、检测、响应、恢复能力</p>
+            </div>
+            <div class="product-item">
+                <h5>专有网络 VPC</h5>
+                <p>基于阿里云构建的专有网络环境，提供完全隔离的网络环境</p>
+            </div>
+            <div class="product-item">
+                <h5>容器服务 ACK</h5>
+                <p>高性能可伸缩的容器应用管理服务，支持Kubernetes容器化应用的生命周期管理</p>
+            </div>
+        </div>
+        
+        <div class="cta-buttons">
+            <a href="https://t.me/xingyao666_bot" class="cta-btn telegram" target="_blank"><i class="fab fa-telegram"></i> Telegram咨询</a>
+            <a href="https://wa.me/6587335198" class="cta-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp咨询</a>
+        </div>
+    </section>
+
+    <!-- 购买流程 -->
+    <section class="content-card">
+        <h2>阿里云购买流程</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <i class="fas fa-comments"></i>
+                <h4>1. 联系客服</h4>
+                <p>通过Telegram或WhatsApp联系我们的客服团队，告知您的需求</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-user-plus"></i>
+                <h4>2. 账号开通</h4>
+                <p>我们将为您快速开通阿里云国际版账号，无需实名认证</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-wallet"></i>
+                <h4>3. 充值付款</h4>
+                <p>根据预估使用量进行充值，支持多种支付方式，充值后即可使用</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-rocket"></i>
+                <h4>4. 开始使用</h4>
+                <p>登录阿里云控制台，选购所需产品，我们提供全程技术支持</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 适用场景 -->
+    <section class="content-card">
+        <h2>阿里云适用场景</h2>
+        
+        <h3>企业网站与应用</h3>
+        <p>阿里云ECS云服务器配合RDS数据库、OSS存储、CDN加速，为企业网站和应用提供稳定、高效的运行环境。支持高并发访问，确保业务连续性。</p>
+        
+        <h3>电商平台</h3>
+        <p>弹性伸缩能力应对促销高峰流量，负载均衡保证服务稳定，CDN加速提升用户体验，云数据库保障交易数据安全。</p>
+        
+        <h3>移动应用后端</h3>
+        <p>提供稳定的API服务，支持海量并发请求，配合对象存储OSS存储用户数据和多媒体文件，实现快速响应。</p>
+        
+        <h3>大数据分析</h3>
+        <p>MaxCompute大数据计算服务，配合DataWorks数据开发平台，帮助企业快速构建大数据分析平台，挖掘数据价值。</p>
+        
+        <h3>游戏行业</h3>
+        <p>全球部署降低延迟，DDoS高防保障游戏稳定运行，弹性伸缩应对玩家数量波动，提供流畅的游戏体验。</p>
+        
+        <h3>视频直播</h3>
+        <p>视频直播服务配合CDN加速，实现低延迟、高并发的直播体验。支持多种清晰度转码，满足不同网络环境需求。</p>
+    </section>
+
+    <!-- 技术支持 -->
+    <section class="content-card">
+        <h2>星耀云提供的技术支持服务</h2>
+        
+        <ul>
+            <li><strong>架构咨询：</strong>根据您的业务需求，设计最优的云架构方案，确保性能、安全性和成本的平衡</li>
+            <li><strong>迁移服务：</strong>协助您将现有业务平滑迁移至阿里云，制定详细的迁移计划，最小化业务中断</li>
+            <li><strong>性能优化：</strong>分析系统性能瓶颈，提供优化建议，提升应用响应速度和用户体验</li>
+            <li><strong>安全加固：</strong>配置安全组、WAF防火墙、DDoS防护等安全措施，保障系统安全</li>
+            <li><strong>成本优化：</strong>分析资源使用情况，提供成本优化方案，帮助您降低云服务开支</li>
+            <li><strong>7×24小时支持：</strong>全天候技术支持，快速响应您的问题，确保业务稳定运行</li>
+            <li><strong>培训服务：</strong>提供阿里云产品使用培训，帮助您的团队快速掌握云服务技能</li>
+        </ul>
+        
+        <div class="cta-buttons">
+            <a href="https://t.me/xingyao666_bot" class="cta-btn telegram" target="_blank"><i class="fab fa-telegram"></i> Telegram</a>
+            <a href="https://wa.me/6587335198" class="cta-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- 价格优势 -->
+    <section class="content-card">
+        <h2>价格优势对比</h2>
+        <table class="info-table">
+            <thead>
+                <tr>
+                    <th>购买方式</th>
+                    <th>价格折扣</th>
+                    <th>技术支持</th>
+                    <th>支付方式</th>
+                    <th>实名要求</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>官网直购</td>
+                    <td>无折扣</td>
+                    <td>工单支持（响应慢）</td>
+                    <td>信用卡</td>
+                    <td>需要实名</td>
+                </tr>
+                <tr>
+                    <td>通过星耀云</td>
+                    <td>最高40%折扣</td>
+                    <td>7×24小时专业支持</td>
+                    <td>支付宝/微信/USDT等</td>
+                    <td>免实名</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- FAQ -->
+    <section class="content-card">
+        <h2>常见问题解答</h2>
+        
+        <div class="faq-item">
+            <h4>如何注册阿里云账号？</h4>
+            <p>联系星耀云客服，我们将为您快速开通阿里云国际版账号，无需您自己注册，也无需实名认证。</p>
+        </div>
+        
+        <div class="faq-item">
+            <h4>通过星耀云购买有什么优势？</h4>
+            <p>价格更优惠（最高40%折扣）、支付更便捷（支持多种支付方式）、服务更专业（7×24小时技术支持）、无需实名认证。</p>
+        </div>
+        
+        <div class="faq-item">
+            <h4>支持哪些支付方式？</h4>
+            <p>我们支持支付宝、微信支付、银行转账、USDT等多种支付方式，无需绑定信用卡。</p>
+        </div>
+        
+        <div class="faq-item">
+            <h4>充值多久到账？</h4>
+            <p>一般情况下，充值在5-30分钟内到账。如遇特殊情况，可联系客服加急处理。</p>
+        </div>
+        
+        <div class="faq-item">
+            <h4>提供哪些技术支持？</h4>
+            <p>我们提供架构咨询、迁移服务、性能优化、安全加固、成本优化、故障排查等全方位技术支持，7×24小时在线服务。</p>
+        </div>
+        
+        <div class="faq-item">
+            <h4>账号安全吗？</h4>
+            <p>我们提供的是阿里云官方账号，完全安全可靠。账号的所有权归您所有，我们不会访问您的数据。</p>
+        </div>
+        
+        <div class="faq-item">
+            <h4>可以购买哪些产品？</h4>
+            <p>阿里云全线产品均可购买，包括ECS云服务器、OSS对象存储、RDS数据库、CDN、负载均衡、安全产品等200+款产品。</p>
+        </div>
+        
+        <div class="faq-item">
+            <h4>是否有最低充值金额？</h4>
+            <p>一般建议首次充值500元起，具体可根据您的实际需求灵活调整，详情请咨询客服。</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="content-card" style="text-align:center">
+        <h2>立即开始使用阿里云</h2>
+        <p>联系星耀云客服，获取专属优惠和技术支持</p>
+        <div class="cta-buttons">
+            <a href="https://t.me/xingyao666_bot" class="cta-btn telegram" target="_blank"><i class="fab fa-telegram"></i> Telegram联系</a>
+            <a href="https://wa.me/6587335198" class="cta-btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp联系</a>
+        </div>
+    </section>
+</main>
+
+<script>
+function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-switch button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    localStorage.setItem('preferredLang', lang);
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('preferredLang') || 'zh';
+    if (savedLang !== 'zh') {
+        document.body.className = 'lang-' + savedLang;
+        document.querySelectorAll('.lang-switch button').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.textContent.toLowerCase().includes(savedLang) || (savedLang === 'zh' && btn.textContent.includes('中文'))) {
+                btn.classList.add('active');
+            }
+        });
+    }
+});
+</script>
+
+<footer>
+    <p>© 2025 星耀云 Starflare Cloud. 全球领先的一站式多云管理与代理服务商</p>
+    <p style="margin-top:10px">
+        <a href="https://t.me/xingyao666_bot" target="_blank">Telegram</a> | 
+        <a href="https://wa.me/6587335198" target="_blank">WhatsApp: +65 8733 5198</a>
+    </p>
+</footer>
+
+</body>
+</html>

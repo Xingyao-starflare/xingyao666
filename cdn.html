@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDN加速 - 星耀云 Starflare Cloud</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root{--primary:#0F3460;--dark:#000000;--mid-blue:#1A1A2E;--light-blue:#16213E;--text:#E5E5E5;--accent:#00D4FF;--cdn-green:#00C853}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Segoe UI',Microsoft YaHei,Arial,sans-serif;background:linear-gradient(135deg,var(--dark) 0%,var(--mid-blue) 50%,var(--light-blue) 100%);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+        
+        header{background:var(--dark);padding:0;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 20px rgba(15,52,96,0.5)}
+        .header-top{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto;padding:10px 5%}
+        .logo-container{display:flex;align-items:center;gap:15px}
+        .logo-img{height:50px;width:auto}
+        .logo{font-size:24px;font-weight:900;letter-spacing:2px;text-shadow:0 0 20px rgba(0,212,255,0.8)}
+        .logo span{color:var(--accent)}
+        .lang-switch button{background:none;border:none;color:var(--text);font-size:14px;margin-left:10px;cursor:pointer;transition:0.3s;padding:5px 10px;border-radius:4px}
+        .lang-switch button:hover,.lang-switch button.active{color:var(--accent);font-weight:bold;background:rgba(0,212,255,0.1)}
+        
+        .nav-menu{background:rgba(26,26,46,0.95);border-top:1px solid rgba(0,212,255,0.2)}
+        .nav-container{max-width:1400px;margin:0 auto;padding:0 5%;display:flex;justify-content:center}
+        .nav-menu ul{display:flex;list-style:none;gap:0}
+        .nav-menu li{position:relative}
+        .nav-menu a{display:block;padding:15px 25px;color:var(--text);text-decoration:none;font-size:15px;transition:0.3s;border-bottom:3px solid transparent}
+        .nav-menu a:hover,.nav-menu a.active{color:var(--accent);background:rgba(0,212,255,0.1);border-bottom-color:var(--accent)}
+        
+        main{max-width:1400px;margin:140px auto 0;padding:0 5%}
+        section{padding:60px 0;text-align:center}
+        
+        .hero-banner{background:linear-gradient(135deg, #00C853 0%, #00E676 50%, #69F0AE 100%);border-radius:20px;padding:80px 40px;margin-bottom:40px;position:relative;overflow:hidden}
+        .hero-banner h1{font-size:48px;margin-bottom:20px;color:#fff}
+        .hero-banner p{font-size:20px;color:rgba(255,255,255,0.95);max-width:800px;margin:0 auto 30px}
+        .hero-banner .cdn-icon{font-size:80px;color:#fff;margin-bottom:20px}
+        
+        .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;margin:40px 0}
+        .feature-card{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);padding:30px;border-radius:16px;border:1px solid rgba(0,200,83,0.2);transition:0.3s;text-align:left}
+        .feature-card:hover{transform:translateY(-8px);border-color:var(--cdn-green);box-shadow:0 15px 40px rgba(0,200,83,0.15)}
+        .feature-card i{font-size:40px;color:var(--cdn-green);margin-bottom:15px}
+        .feature-card h3{font-size:20px;margin-bottom:12px;color:var(--text)}
+        .feature-card p{font-size:15px;opacity:0.9}
+        
+        .providers-section{background:rgba(255,255,255,0.03);border-radius:20px;padding:50px 30px;margin:40px 0}
+        .providers-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:30px}
+        .provider-card{background:linear-gradient(135deg, rgba(0,200,83,0.1) 0%, rgba(35,47,62,0.3) 100%);border-radius:12px;padding:30px;text-align:center;transition:0.3s;border:1px solid rgba(0,200,83,0.2)}
+        .provider-card:hover{transform:translateY(-5px);border-color:var(--cdn-green)}
+        .provider-card i{font-size:40px;color:var(--cdn-green);margin-bottom:15px}
+        .provider-card h4{font-size:18px;margin-bottom:8px}
+        .provider-card p{font-size:13px;opacity:0.8}
+        
+        .stats-section{margin:40px 0}
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-top:30px}
+        .stat-card{background:rgba(255,255,255,0.05);border-radius:12px;padding:30px;text-align:center;border:1px solid rgba(0,200,83,0.2)}
+        .stat-card .number{font-size:42px;font-weight:700;color:var(--cdn-green);margin-bottom:10px}
+        .stat-card .label{font-size:14px;opacity:0.8}
+        
+        .use-cases{margin:40px 0}
+        .use-cases-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:30px}
+        .use-case-card{background:rgba(255,255,255,0.05);border-radius:12px;padding:25px;text-align:left;border:1px solid rgba(0,200,83,0.2);transition:0.3s}
+        .use-case-card:hover{border-color:var(--cdn-green)}
+        .use-case-card i{font-size:30px;color:var(--cdn-green);margin-bottom:12px}
+        .use-case-card h4{font-size:18px;margin-bottom:10px}
+        .use-case-card p{font-size:14px;opacity:0.85}
+        
+        .cta-section{background:linear-gradient(135deg, rgba(0,200,83,0.2) 0%, rgba(35,47,62,0.4) 100%);border-radius:20px;padding:50px 30px;margin:40px 0;text-align:center}
+        .cta-section h2{font-size:32px;margin-bottom:15px}
+        .cta-section p{font-size:16px;opacity:0.9;margin-bottom:25px}
+        .cta-buttons{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+        .cta-btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;border-radius:50px;font-size:16px;font-weight:600;text-decoration:none;transition:0.3s}
+        .cta-btn.primary{background:var(--cdn-green);color:#fff}
+        .cta-btn.secondary{background:transparent;border:2px solid var(--cdn-green);color:var(--cdn-green)}
+        .cta-btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,200,83,0.3)}
+        
+        footer{background:var(--dark);padding:40px 5%;text-align:center;margin-top:60px}
+        footer p{opacity:0.7;font-size:14px}
+        footer a{color:var(--accent);text-decoration:none}
+        
+        .zh,.en,.pt{display:none}
+        body.lang-zh .zh{display:block}
+        body.lang-en .en{display:block}
+        body.lang-pt .pt{display:block}
+        
+        @media(max-width:768px){
+            .hero-banner h1{font-size:32px}
+            .features-grid,.providers-grid{grid-template-columns:1fr}
+            .nav-menu ul{flex-wrap:wrap;justify-content:center}
+            .nav-menu a{padding:10px 15px;font-size:13px}
+        }
+    </style>
+</head>
+<body class="lang-zh">
+    <header>
+        <div class="header-top">
+            <div class="logo-container">
+                <img src="starflare_logo_transparent.png" alt="Starflare Cloud Logo" class="logo-img">
+                <div class="logo"><span>星耀云</span> Starflare Cloud</div>
+            </div>
+            <div class="lang-switch">
+                <button onclick="setLang('zh')" class="active">中文</button>
+                <button onclick="setLang('en')">EN</button>
+                <button onclick="setLang('pt')">PT</button>
+            </div>
+        </div>
+        <nav class="nav-menu">
+            <div class="nav-container">
+                <ul>
+                    <li><a href="index.html" class="zh">首页</a><a href="index.html" class="en">Home</a><a href="index.html" class="pt">Início</a></li>
+                    <li><a href="aws.html" class="zh">亚马逊云AWS</a><a href="aws.html" class="en">AWS</a><a href="aws.html" class="pt">AWS</a></li>
+                    <li><a href="aliyun.html" class="zh">阿里云</a><a href="aliyun.html" class="en">Alibaba Cloud</a><a href="aliyun.html" class="pt">Alibaba Cloud</a></li>
+                    <li><a href="tencent.html" class="zh">腾讯云</a><a href="tencent.html" class="en">Tencent Cloud</a><a href="tencent.html" class="pt">Tencent Cloud</a></li>
+                    <li><a href="cloudflare.html" class="zh">Cloudflare</a><a href="cloudflare.html" class="en">Cloudflare</a><a href="cloudflare.html" class="pt">Cloudflare</a></li>
+                    <li><a href="cdn.html" class="active zh">CDN加速</a><a href="cdn.html" class="active en">CDN</a><a href="cdn.html" class="active pt">CDN</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-banner">
+            <i class="fas fa-globe cdn-icon"></i>
+            <h1 class="zh">全球CDN & 边缘节点</h1>
+            <h1 class="en">Global CDN & Edge Nodes</h1>
+            <h1 class="pt">CDN Global e Nós de Borda</h1>
+            <p class="zh">代理全球领先CDN与边缘计算节点，提供低延迟加速与分发服务，覆盖3000+ PoPs，多云融合纳管，资源调配灵活。</p>
+            <p class="en">Reseller for leading global CDN & edge nodes, providing low-latency acceleration with 3000+ PoPs coverage, multi-cloud integration, flexible resource allocation.</p>
+            <p class="pt">Revendedor de CDN global líder e nós de borda, fornecendo aceleração de baixa latência com cobertura de 3000+ PoPs, integração multi-nuvem, alocação flexível de recursos.</p>
+        </section>
+
+        <section>
+            <h2 class="zh">CDN加速优势</h2>
+            <h2 class="en">CDN Acceleration Advantages</h2>
+            <h2 class="pt">Vantagens da Aceleração CDN</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-layer-group"></i>
+                    <h3 class="zh">多云融合纳管</h3>
+                    <h3 class="en">Multi-cloud Integration</h3>
+                    <h3 class="pt">Integração Multi-nuvem</h3>
+                    <p class="zh">统一管理多个CDN服务商资源，智能调度，实现最优性能和成本平衡。</p>
+                    <p class="en">Unified management of multiple CDN provider resources with intelligent scheduling for optimal performance and cost balance.</p>
+                    <p class="pt">Gestão unificada de recursos de múltiplos provedores CDN com agendamento inteligente para desempenho e custo ideais.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-sliders-h"></i>
+                    <h3 class="zh">资源调配灵活</h3>
+                    <h3 class="en">Flexible Resource Allocation</h3>
+                    <h3 class="pt">Alocação Flexível de Recursos</h3>
+                    <p class="zh">根据业务需求动态调整CDN资源，支持按需扩展，避免资源浪费。</p>
+                    <p class="en">Dynamically adjust CDN resources based on business needs, supporting on-demand scaling to avoid waste.</p>
+                    <p class="pt">Ajuste dinâmico de recursos CDN com base nas necessidades do negócio, suportando escalonamento sob demanda.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <h3 class="zh">财务流水管理</h3>
+                    <h3 class="en">Financial Flow Management</h3>
+                    <h3 class="pt">Gestão de Fluxo Financeiro</h3>
+                    <p class="zh">统一账单管理，清晰的费用明细，支持多币种结算，简化财务流程。</p>
+                    <p class="en">Unified billing management with clear cost breakdown, multi-currency settlement support, simplified financial process.</p>
+                    <p class="pt">Gestão de faturamento unificada com detalhamento claro de custos, suporte a liquidação multi-moeda, processo financeiro simplificado.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3 class="zh">低延迟高性能</h3>
+                    <h3 class="en">Low Latency High Performance</h3>
+                    <h3 class="pt">Baixa Latência Alto Desempenho</h3>
+                    <p class="zh">全球3000+节点覆盖，智能路由优化，确保用户获得最佳访问体验。</p>
+                    <p class="en">3000+ global nodes coverage with intelligent routing optimization ensuring best user experience.</p>
+                    <p class="pt">Cobertura de 3000+ nós globais com otimização de roteamento inteligente garantindo a melhor experiência do usuário.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="providers-section">
+            <h2 class="zh">合作CDN服务商</h2>
+            <h2 class="en">CDN Service Partners</h2>
+            <h2 class="pt">Parceiros de Serviço CDN</h2>
+            <div class="providers-grid">
+                <div class="provider-card">
+                    <i class="fab fa-aws"></i>
+                    <h4>Amazon CloudFront</h4>
+                    <p class="zh">AWS全球CDN</p>
+                    <p class="en">AWS Global CDN</p>
+                    <p class="pt">CDN Global AWS</p>
+                </div>
+                <div class="provider-card">
+                    <i class="fas fa-cloud"></i>
+                    <h4>Alibaba CDN</h4>
+                    <p class="zh">阿里云CDN</p>
+                    <p class="en">Alibaba Cloud CDN</p>
+                    <p class="pt">CDN Alibaba Cloud</p>
+                </div>
+                <div class="provider-card">
+                    <i class="fas fa-cloud"></i>
+                    <h4>Tencent CDN</h4>
+                    <p class="zh">腾讯云CDN</p>
+                    <p class="en">Tencent Cloud CDN</p>
+                    <p class="pt">CDN Tencent Cloud</p>
+                </div>
+                <div class="provider-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>Cloudflare</h4>
+                    <p class="zh">全球边缘网络</p>
+                    <p class="en">Global Edge Network</p>
+                    <p class="pt">Rede de Borda Global</p>
+                </div>
+                <div class="provider-card">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Akamai</h4>
+                    <p class="zh">企业级CDN</p>
+                    <p class="en">Enterprise CDN</p>
+                    <p class="pt">CDN Empresarial</p>
+                </div>
+                <div class="provider-card">
+                    <i class="fas fa-network-wired"></i>
+                    <h4>Fastly</h4>
+                    <p class="zh">边缘计算平台</p>
+                    <p class="en">Edge Computing Platform</p>
+                    <p class="pt">Plataforma de Edge Computing</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h2 class="zh">全球网络覆盖</h2>
+            <h2 class="en">Global Network Coverage</h2>
+            <h2 class="pt">Cobertura de Rede Global</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number">3000+</div>
+                    <div class="label zh">全球PoPs节点</div>
+                    <div class="label en">Global PoPs</div>
+                    <div class="label pt">PoPs Globais</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">200+</div>
+                    <div class="label zh">覆盖国家</div>
+                    <div class="label en">Countries</div>
+                    <div class="label pt">Países</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">99.99%</div>
+                    <div class="label zh">服务可用性</div>
+                    <div class="label en">Availability</div>
+                    <div class="label pt">Disponibilidade</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number">&lt;50ms</div>
+                    <div class="label zh">平均延迟</div>
+                    <div class="label en">Avg Latency</div>
+                    <div class="label pt">Latência Média</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="use-cases">
+            <h2 class="zh">应用场景</h2>
+            <h2 class="en">Use Cases</h2>
+            <h2 class="pt">Casos de Uso</h2>
+            <div class="use-cases-grid">
+                <div class="use-case-card">
+                    <i class="fas fa-video"></i>
+                    <h4 class="zh">视频直播</h4>
+                    <h4 class="en">Live Streaming</h4>
+                    <h4 class="pt">Streaming ao Vivo</h4>
+                    <p class="zh">低延迟直播分发，支持百万级并发，确保流畅观看体验。</p>
+                    <p class="en">Low-latency live streaming distribution supporting millions of concurrent viewers.</p>
+                    <p class="pt">Distribuição de streaming ao vivo de baixa latência suportando milhões de espectadores simultâneos.</p>
+                </div>
+                <div class="use-case-card">
+                    <i class="fas fa-gamepad"></i>
+                    <h4 class="zh">游戏加速</h4>
+                    <h4 class="en">Game Acceleration</h4>
+                    <h4 class="pt">Aceleração de Jogos</h4>
+                    <p class="zh">全球游戏服务器加速，降低延迟，提升玩家体验。</p>
+                    <p class="en">Global game server acceleration reducing latency and enhancing player experience.</p>
+                    <p class="pt">Aceleração de servidor de jogos global reduzindo latência e melhorando a experiência do jogador.</p>
+                </div>
+                <div class="use-case-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h4 class="zh">电商网站</h4>
+                    <h4 class="en">E-commerce</h4>
+                    <h4 class="pt">E-commerce</h4>
+                    <p class="zh">静态资源加速，图片优化，提升页面加载速度和转化率。</p>
+                    <p class="en">Static resource acceleration, image optimization, improving page load speed and conversion.</p>
+                    <p class="pt">Aceleração de recursos estáticos, otimização de imagens, melhorando velocidade de carregamento e conversão.</p>
+                </div>
+                <div class="use-case-card">
+                    <i class="fas fa-download"></i>
+                    <h4 class="zh">大文件下载</h4>
+                    <h4 class="en">Large File Download</h4>
+                    <h4 class="pt">Download de Arquivos Grandes</h4>
+                    <p class="zh">软件分发、固件更新、大文件下载加速。</p>
+                    <p class="en">Software distribution, firmware updates, large file download acceleration.</p>
+                    <p class="pt">Distribuição de software, atualizações de firmware, aceleração de download de arquivos grandes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2 class="zh">立即开始使用CDN加速</h2>
+            <h2 class="en">Start Using CDN Acceleration Today</h2>
+            <h2 class="pt">Comece a Usar Aceleração CDN Hoje</h2>
+            <p class="zh">联系我们获取定制化CDN解决方案，享受全球加速服务</p>
+            <p class="en">Contact us for customized CDN solutions and global acceleration services</p>
+            <p class="pt">Entre em contato para soluções CDN personalizadas e serviços de aceleração global</p>
+            <div class="cta-buttons">
+                <a href="https://t.me/xingyao666_bot" class="cta-btn primary"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="mailto:Xingyao@starflare.technology" class="cta-btn secondary"><i class="fas fa-envelope"></i> Email</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="zh">© 2024 星耀技术有限公司 Starflare Technology. 保留所有权利。</p>
+        <p class="en">© 2024 Starflare Technology Company Limited. All rights reserved.</p>
+        <p class="pt">© 2024 Starflare Technology Company Limited. Todos os direitos reservados.</p>
+        <p class="zh">商务联系: <a href="mailto:Xingyao@starflare.technology">Xingyao@starflare.technology</a> | Telegram: <a href="https://t.me/xingyao666_bot">@xingyao666_bot</a></p>
+        <p class="en">Business Contact: <a href="mailto:Xingyao@starflare.technology">Xingyao@starflare.technology</a> | Telegram: <a href="https://t.me/xingyao666_bot">@xingyao666_bot</a></p>
+        <p class="pt">Contato Comercial: <a href="mailto:Xingyao@starflare.technology">Xingyao@starflare.technology</a> | Telegram: <a href="https://t.me/xingyao666_bot">@xingyao666_bot</a></p>
+    </footer>
+
+    <script>
+        function setLang(lang) {
+            document.body.className = 'lang-' + lang;
+            document.querySelectorAll('.lang-switch button').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            localStorage.setItem('preferredLang', lang);
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLang') || 'zh';
+            setLang(savedLang);
+        });
+    </script>
+</body>
+</html>
